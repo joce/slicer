@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Page
+    x:Class="slicer.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:slicer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid AllowDrop="True" Drop="OnImageDrop" DragOver="OnImageDragOver">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <!-- Toolbar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="12" Padding="12,8" Background="{ThemeResource LayerFillColorDefaultBrush}">
+            <Button Content="Open" Click="OnOpenClick" />
+            <Button Content="Save" Click="OnSaveClick" x:Name="SaveButton" IsEnabled="False" />
+            <Button Content="Save As" Click="OnSaveAsClick" x:Name="SaveAsButton" IsEnabled="False" />
+            <TextBlock Text="Slice size (px):" VerticalAlignment="Center" />
+            <TextBox
+                x:Name="SliceSizeTextBox"
+                Width="80"
+                InputScope="Number"
+                PlaceholderText="e.g. 5"
+                IsEnabled="False"
+                TextChanged="OnSliceSizeTextChanged" />
+            <Button Content="Slice Horizontal" Click="OnSliceHorizontalClick" x:Name="SliceHorizontalButton" IsEnabled="False" />
+            <Button Content="Slice Vertical" Click="OnSliceVerticalClick" x:Name="SliceVerticalButton" IsEnabled="False" />
+        </StackPanel>
+
+        <!-- Image display -->
+        <Grid Grid.Row="1" AllowDrop="True" Drop="OnImageDrop" DragOver="OnImageDragOver" Background="Transparent">
+            <Image
+                x:Name="ImageDisplay"
+                Stretch="Uniform"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                AllowDrop="True"
+                Drop="OnImageDrop"
+                DragOver="OnImageDragOver" />
+        </Grid>
+
+        <!-- Status bar -->
+        <Border Grid.Row="2" Background="{ThemeResource LayerFillColorDefaultBrush}" Padding="12,8">
+            <TextBlock x:Name="StatusText" Text="No image loaded" />
+        </Border>
+    </Grid>
+</Page>

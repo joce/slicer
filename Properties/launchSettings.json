@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "slicer (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "slicer (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
