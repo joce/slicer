@@ -1,3 +1,5 @@
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml.Navigation;
 
 namespace slicer
@@ -28,6 +30,17 @@ namespace slicer
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             window ??= new Window();
+
+            try
+            {
+                var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+                var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(hwnd);
+                var appWindow = AppWindow.GetFromWindowId(windowId);
+                var iconPath = System.IO.Path.Combine(AppContext.BaseDirectory, "slicer.ico");
+                if (System.IO.File.Exists(iconPath))
+                    appWindow.SetIcon(iconPath);
+            }
+            catch { /* Icon may fail in unpackaged mode */ }
 
             if (window.Content is not Frame rootFrame)
             {
